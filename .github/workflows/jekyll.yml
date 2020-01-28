@@ -22,5 +22,5 @@ jobs:
     - name: Install http server
       run: |
         sudo npm install -g http-server
-        sudo npm install -g accessibility-insights-scan
+        npm install accessibility-insights-scan
         http-server ${{ github.workspace }}/_site &
