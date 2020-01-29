@@ -21,6 +21,16 @@ jobs:
         
     - name: Install http server
       run: |
-        sudo npm install -g http-server
+        npm install -g http-server
         npm install accessibility-insights-scan
-        http-server ${{ github.workspace }}/_site &
+        npx http-server ${{ github.workspace }}/_site -p 9123 &
+        npx ai-scan --url http://127.0.0.1:9123 --output ${{ github.workspace }}/_reports
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+      # Artifact name
+        name: reports
+      # Directory containing files to upload
+        path: ${{ github.workspace }}/_reports
+        
